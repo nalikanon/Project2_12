@@ -48,3 +48,36 @@ print(classification_report(y_test, y_pred))
 # บันทึกโมเดล
 joblib.dump(model, 'model.pkl')
 joblib.dump(scaler, 'scaler.pkl')
+
+# project2_groupX.py
+import streamlit as st
+
+# โหลดโมเดล
+model = joblib.load("model.pkl")
+scaler = joblib.load("scaler.pkl")
+
+# โหลดข้อมูลเพื่อดู features
+df = pd.read_csv("Telco-Customer-Churn.csv")
+df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
+df.dropna(inplace=True)
+df.drop(['customerID'], axis=1, inplace=True)
+df['Churn'] = pd.factorize(df['Churn'])[0]
+X = df.drop('Churn', axis=1)
+X = pd.get_dummies(X, drop_first=True)
+feature_names = X.columns
+
+# UI ของแอป
+st.title("📊 Project2_GroupX - พยากรณ์การยกเลิกบริการลูกค้า")
+
+# ใส่ข้อมูลลูกค้า
+input_data = []
+for feature in feature_names:
+    val = st.number_input(f"{feature}", value=0.0)
+    input_data.append(val)
+
+# ปุ่มทำนาย
+if st.button("🔮 ทำนาย"):
+    user_input = np.array(input_data).reshape(1, -1)
+    scaled = scaler.transform(user_input)
+    prediction = model.predict(scaled)[0]
+    st.success("ลูกค้า **จะยกเลิกบริการ**" if prediction == 1 else "ลูกค้า **จะไม่ยกเลิกบริการ**")

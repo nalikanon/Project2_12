@@ -71,7 +71,7 @@ X = pd.get_dummies(X, drop_first=True)
 feature_names = X.columns
 
 # UI ของแอป
-st.title("📊 Project2_GroupX - พยากรณ์การยกเลิกบริการลูกค้า")
+st.title("📊 Project2_12 - Customer service churn forecast")
 
 # ใส่ข้อมูลลูกค้า
 input_data = []
@@ -80,8 +80,8 @@ for feature in feature_names:
     input_data.append(val)
 
 # ปุ่มทำนาย
-if st.button("🔮 ทำนาย"):
+if st.button("🔮 predict"):
     user_input = np.array(input_data).reshape(1, -1)
     scaled = scaler.transform(user_input)
     prediction = model.predict(scaled)[0]
-    st.success("ลูกค้า **จะยกเลิกบริการ**" if prediction == 1 else "ลูกค้า **จะไม่ยกเลิกบริการ**")
+    st.success("The customer **would like to cancel the service**" if prediction == 1 else "Customers **will not cancel service**")

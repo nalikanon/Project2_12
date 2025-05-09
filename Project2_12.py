@@ -1,7 +1,11 @@
-# Project2_GroupX.ipynb
+# Project2_12.ipynb
+
 # Group Members:
-# 1. 65123456 - สมชาย ใจดี
-# 2. 65123457 - สุพรรณษา ดีงาม
+# 1. 6531501132 - Ananya Samyo
+# 2. 6531501136 - Apisit Yambangyang
+# 3. 6531501138 - Kullaporn promlachai
+# 4. 6531501145 - Nathida Thanauppatham
+# 5. 6531501163 - Peerawit Kubang
 
 import pandas as pd
 import numpy as np
